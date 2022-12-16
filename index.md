@@ -39,7 +39,6 @@ Zooming in, we can see our predictions don't start until a fair bit into the tes
 To evaluate the models, we can look at the plots, as well as evaluate the mean squared error on the validation and specificallly the test set. This tells us that our convolutional model performed the best.
 
 ```txt
-__One day prediction (label width is 1)__
 lstm validation MSE: 0.00680
 auto recurrent validation MSE: 0.00114
 convolution validation MSE: 0.00090
@@ -47,29 +46,75 @@ lstm test MSE: 0.00406
 auto recurrent test MSE: 0.00095
 convolution test MSE: 0.00089
 ```
+
 ![zoom1](zoom1.png)
 
 Next, we tried predicting the AAPL stock for the next 2 days, given the last 30 days. On the following figures we have plotted a some 2-day predictions, which are all predicted on the previous 30 days.
+
+```txt
+lstm validation MSE: 0.00679
+auto recurrent validation MSE: 0.00202
+convolution validation MSE: 0.00109
+lstm test MSE: 0.00405
+auto recurrent test MSE: 0.00144
+convolution test MSE: 0.00101
+```
 
 ![big2](big2.png)
 ![zoom2](zoom2.png)
 
 4 etc etc..?
 
+```txt
+lstm validation MSE: 0.01110
+auto recurrent validation MSE: 0.00192
+convolution validation MSE: 0.00160
+lstm test MSE: 0.00618
+auto recurrent test MSE: 0.00177
+convolution test MSE: 0.00130
+```
+
 ![big4](big4.png)
 ![zoom4](zoom4.png)
 
 8 etc etc..?
+
+```txt
+lstm validation MSE: 0.01037
+auto recurrent validation MSE: 0.00308
+convolution validation MSE: 0.00328
+lstm test MSE: 0.00474
+auto recurrent test MSE: 0.00317
+convolution test MSE: 0.00220
+```
 
 ![big8](big8.png)
 ![zoom8](zoom8.png)
 
 16 etc etc..?
 
+```txt
+lstm validation MSE: 0.01502
+auto recurrent validation MSE: 0.00441
+convolution validation MSE: 0.00422
+lstm test MSE: 0.00549
+auto recurrent test MSE: 0.00394
+convolution test MSE: 0.00258
+```
+
 ![big16](big16.png)
 ![zoom16](zoom16.png)
 
 32 etc etc..?
+
+```txt
+lstm validation MSE: 0.04082
+auto recurrent validation MSE: 0.01007
+convolution validation MSE: 0.00734
+lstm test MSE: 0.01377
+auto recurrent test MSE: 0.00494
+convolution test MSE: 0.00342
+```
 
 ![big32](big32.png)
 ![zoom32](zoom32.png)
