@@ -4,7 +4,7 @@ The stock market has huge potential for experimenting with deep learning. If one
 
 ## Problem Statement
 
-For our final project, we analyze 2 single-shot prediction models: an LSTM model, and a convolutional model, as well as an autogregressive LSTM model, to see which model, given only historical data of a particular stock, performs the best in predicting future stock prices. We hypothesize that despite many claims against being able to make accurate stock price predictions, we will be able to come up with a (relatively) simple model that might give some direction into the trend of a stock price for the coming days.
+For our final project, we analyze 2 single-shot prediction models: an LSTM model, and a convolutional model, as well as an autogregressive LSTM model, to see which model, given only historical data of a particular stock, performs the best in predicting future stock prices. We hypothesize that despite many claims against being able to make accurate stock price predictions, our (relatively) simple models will still give some direction into the trend of a stock price for the coming days.
 
 ![lstm image](lstm.png)
 
@@ -48,13 +48,13 @@ For our autoregressive lstm model, we use a single lstm layer. During prediction
 
 For each model, we trained and evaluted only on a single stock at a time. For most parts, we used AAPL, but we also later retrained our models on other stock to confirm our results.
 
-We noticed that when only predicting one day ahead, the convolutional and single-shot lstm models were relatively close in performance, so to try to clearly differentiate which model is best, we tried evaluating or model by predicting the AAPL stock for the next 2,4,8,16 and 32 days, given the last 30 days. 
+We noticed that when only predicting one day ahead, the convolutional and autoregressive lstm models were relatively close in performance, so to try to clearly differentiate which model is best, we tried evaluating or model by predicting the AAPL stock for the next 2,4,8,16 and 32 days, given the last 30 days. 
 
 Finally, we repeated the experiement for stock other than AAPL. This includes MSFT, GOOG, AMZN, META. For each stock, we also repeated the tests for our different label_widths.
 
 ## Results
 
-While we discovered that the convolutional model performed the best on our data, we were initially surprised how badly all of our models seemed to perform in general. Overall, it seems all 3 models just look at the previous trend, and just assumes that the next stock price will follow that same trend. Our autorecurrent model, which we expected would perform the best, consistently predicted way too low prices, and was clearly the worst out of all. 
+While we discovered that the convolutional model performed the best on our data, we were initially surprised how badly all of our models seemed to perform in general. Overall, it seems all 3 models just look at the previous trend, and just assumes that the next stock price will follow that same trend. Our single-shot lstm model, which we expected would perform among the best, consistently predicted way too low prices, and was clearly the worst out of all. 
 
 Here you can see the entire AAPL stock divided into training, validation and test. Overlayed on the test data are also a couple one day predictions for each of our model.
 
@@ -150,7 +150,7 @@ convolution test MSE: 0.00342
 [![big32](big32.png)](big32.png)
 [![zoom32](zoom32.png)](zoom32.png)
 
-When retraining and testing our models against different stocks, not just AAPL, we found that our convolutional model consistently performed the best, regardless of which stock we used.
+When retraining and testing our models against different stocks, not just AAPL, we found that our convolutional model consistently performed the best, regardless of which stock we used. 
 
 From our this, we conclude that predicting stock prices based purely on historical data is very hard, if not impossible. A stock price depends on so many more factors than just yesterday's price, so regardless of how deep and complex neural network you train, historical data is just not rich enough.
 
@@ -160,7 +160,7 @@ Yahoo finance is missing data for weekends. This makes our plots look slightly s
 
 Because of the limitations of only using historical data, we would like to in the future add more features as inputs, for example headlines from news articles, to see if this would help our models perform better. Sometimes stock prices changes drastically as a reaction to a breaking news article, so building a NLP model to help with stock prediction could potentially help alot.
 
-Moreover, just looking at our predictions, we would like to compare all our models with a naive naive model which just predicts the same stock price as the input. This would provide a lot of insight, because it's possible the naive model might outright beat our neural networks (at least the autoregressive one). This is a theory we would like to test, but didn't have enough time to try and implement.
+Moreover, just looking at our predictions, we would like to compare all our models with a naive naive model which just predicts the same stock price as the input. This would provide a lot of insight, because it's possible the naive model might outright beat our neural networks (at least the oneshot lstm). This is a theory we would like to test, but didn't have enough time to try and implement.
 
 ## Video
 
