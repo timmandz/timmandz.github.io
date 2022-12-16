@@ -18,13 +18,13 @@ First, will pull all closing prices for AAPL (Apple Inc) between X and Y. We spl
 
 We then normalize all data using the mean and standard deviation of the training set. In the future, it might be worthwhile to use rolling averages for this normalization process; however, in the interest of simplicity we use a simple average.
 
-We then preprocess our training set into a format suitable for training by splitting it into windows of consecutive samples from the data. We have two tunable parameters: LOOK_BACK, which is the size of the window used for creating the training_set, and the LOOK_FORWARD, which is the size of the window for the labels. 
+We then preprocess our training set into a format suitable for training. Since we want our models to take historical stock prices as input, and predict future stock prices as output, we have to use the same format during training: From our training set we create two sets, inputs (x) and labels (y). Each sample in our inputs consists of a window of consecutive samples from the data. The size of the window is a tunable parameter (INPUT_WIDTH), and defines how many consecutive days our models will use to make each prediction. Each sample in our labels set is also a window of consecutive sample from the data, where the window is of size LABEL_WIDTH, which defines how many days the model will predict for each prediction. Finally we also have parameter OFFSET which defines how many days into the future the predictions should be from the input. For simplicity we always used OFFSET=1.
 
-For example, to make a single predicition one day into the future (LOOK_FORWARD=1), given six days of history (LOOK_BACKWARD=6), we would need a window like this:
+For example, to make a single predicition (LABEL_WIDTH=1) one day (OFFSET=1) into the future, given six days of history (INPUT_WIDTH=6), we would need a window like this:
 
 ![window example explanation](raw_window_1d.png)
 
-To manage a window, we create a class called WindowGenerator that can handle the indexes and offsets of a window, split windows into feature and label pairs, plot the content of the resulting windows, and efficiently generate batches of these windows from the training, evaluation, and test data.
+Note also that a single pair (input_0, labels_0) overlaps
 
 ## Experiments/evaluation
 
