@@ -38,7 +38,8 @@ Zooming in, we can see our predictions don't start until a fair bit into the tes
 
 To evaluate the models, we can look at the plots, as well as evaluate the mean squared error on the validation and test sets, which tells us that our convolutional model performed the best.
 
-```
+```txt
+**One day prediction (label width is 1)**
 lstm validation MSE: 0.00680
 auto recurrent validation MSE: 0.00114
 convolution validation MSE: 0.00090
