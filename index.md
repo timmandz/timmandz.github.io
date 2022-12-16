@@ -62,7 +62,11 @@ While we discovered that model X performed the best on our data, we were initial
 ## Examples
 
 ## Problems and Future Work
-Because of the limitations of only using historical data, we would like to in the future add more features as inputs, for example headlines from news articles, to see if this would help our models perform better. 
+Yahoo finance is missing data for weekends. This makes our plots look slightly skewed, since samples are grouped into groups of 5. However, we don't think this caused any problems except making our graphs look slightly off.
+
+Because of the limitations of only using historical data, we would like to in the future add more features as inputs, for example headlines from news articles, to see if this would help our models perform better. Sometimes stock prices changes drastically as a reaction to a breaking news article, so building a NLP model to help with stock prediction could potentially help alot.
+
+Moreover, just looking at our bad predictions, we also suspect that a naive model which just predicts the same stock price as yesterdays value might even beat our neural networks, and this is a theory we would like to test, but didn't have enough time to try.
 ## Video
 
 ## Team Members
