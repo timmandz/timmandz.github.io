@@ -36,37 +36,59 @@ Here you can see the entire MSFT stock divided into training, validation and tes
 
 Zooming in, we can see our predictions don't start until a fair bit into the testing set, which is because we have our input_width set to 30. Each blue, magenta and red dot in the plot is a model predictions using the previous 30 greens dots as input. The reason the dots are grouped into chunks are 5 instead of being evenly space dout is because Yahoo Finance does not have stock prices for weekends.  
 
-To evaluate the models, we can look at the plots, as well as evaluate the mean squared error on the validation and test sets, which tells us that our convolutional model performed the best. 
+To evaluate the models, we can look at the plots, as well as evaluate the mean squared error on the validation and test sets, which tells us that our convolutional model performed the best.
+
+```
+lstm validation MSE: 0.00680
+auto recurrent validation MSE: 0.00114
+convolution validation MSE: 0.00090
+lstm test MSE: 0.00406
+auto recurrent test MSE: 0.00095
+convolution test MSE: 0.00089
+```
 ![zoom1](zoom1.png)
 
 Next, we tried predicting the AAPL stock for the next 2 days, given the last 30 days. On the following figures we have plotted a some 2-day predictions, which are all predicted on the previous 30 days.
+
 ![big2](big2.png)
 ![zoom2](zoom2.png)
+
 4 etc etc..?
+
 ![big4](big4.png)
 ![zoom4](zoom4.png)
+
 8 etc etc..?
+
 ![big8](big8.png)
 ![zoom8](zoom8.png)
+
 16 etc etc..?
+
 ![big16](big16.png)
 ![zoom16](zoom16.png)
+
 32 etc etc..?
+
 ![big32](big32.png)
 ![zoom32](zoom32.png)
 
 ## Results
-While we discovered that model X performed the best on our data, we were initially surprised how badly all of our models seemed to perform in general. Overall, it seems all 3 models just look at the previous trend, and just assumes that the next stock price will follow that same trend. We therefore conclude that predicting stock prices based purely on historical data is very hard, if not impossible. A stock price depends on so many more factors than just yesterday's price, so regardless of how deep and complex neural network you train, historical data is just not rich enough.
 
+While we discovered that model X performed the best on our data, we were initially surprised how badly all of our models seemed to perform in general. Overall, it seems all 3 models just look at the previous trend, and just assumes that the next stock price will follow that same trend. We therefore conclude that predicting stock prices based purely on historical data is very hard, if not impossible. A stock price depends on so many more factors than just yesterday's price, so regardless of how deep and complex neural network you train, historical data is just not rich enough.
 
 ## Examples
 
 ## Problems and Future Work
+
 Yahoo finance is missing data for weekends. This makes our plots look slightly skewed, since samples are grouped into groups of 5. However, we don't think this caused any problems except making our graphs look slightly off.
 
 Because of the limitations of only using historical data, we would like to in the future add more features as inputs, for example headlines from news articles, to see if this would help our models perform better. Sometimes stock prices changes drastically as a reaction to a breaking news article, so building a NLP model to help with stock prediction could potentially help alot.
 
+We then normalize all data using the mean and standard deviation of the training set. In the future, it might be worthwhile to use rolling averages for this normalization process.
+
 Moreover, just looking at our bad predictions, we also suspect that a naive model which just predicts the same stock price as yesterdays value might even beat our neural networks, and this is a theory we would like to test, but didn't have enough time to try.
+
 ## Video
 
 ## Team Members
