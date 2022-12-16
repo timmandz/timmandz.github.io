@@ -1,6 +1,6 @@
 ## Abstract
 
-The stock market has huge potential for experimenting with deep learning. If one is able to accurately predict future stock prices, a lot of money can be made. In this project we use compare different model architectures and their ability to forecast the stock market in the hopes of finding out which model architectures are the best.
+The stock market has huge potential for experimenting with deep learning. If one is able to accurately predict future stock prices, a lot of money can be made. In this project we compare different model architectures and their ability to forecast the stock market in the hopes of finding out which model architectures are the best.
 
 ## Problem Statement
 
