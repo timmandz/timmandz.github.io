@@ -18,7 +18,7 @@ We get all of our stock price data using yFinance, which is an open-source Pytho
 
 ![yfinance data example](yfinance_data.png)
 
-First, we pull all closing prices for AAPL (Apple Inc) between X and Y. We split the data into training, validation, and test sets using the ratios (70%, 20%, 10%). (include image here). We do not shuffle the data before splitting to maintain it's orginal order, and to ensure that the validation and testing sets are collected after the training set, which mimics how one would use the model in the real world. 
+First, we pull all closing prices for AAPL (Apple Inc) between 2018-01-01 and 2022-12-15. We split the data into training, validation, and test sets using the ratios (70%, 20%, 10%). (include image here). We do not shuffle the data before splitting to maintain it's orginal order, and to ensure that the validation and testing sets are collected after the training set, which mimics how one would use stock prediction models in the real world. 
 
 We then normalize all data using the mean and standard deviation of the training set. In the future, it might be worthwhile to use rolling averages for this normalization process; however, in the interest of simplicity we use a simple average.
 
@@ -40,17 +40,17 @@ For the single-shot convoltional neural network, we used a model with a 1d convo
 
 For our single-shot lstm network, we vertically stacked 3 LSTMs of 32 units each, and then mapped it to our label_width using 1 linear layer.
 
-For our autoregressive lstm model, we use a single lstm layer, whose outputs get fed back into the model again, repeated label_width number of times.
+For our autoregressive lstm model, we use a single lstm layer. During prediction, the outputs get fed back into the model again, repeated label_width number of times.
 
 For each model, we trained and evaluted only on a single stock at a time. For most parts, we used AAPL, but we also later retrained our models on other stock to confirm our results.
 
-When only predicting one day ahead, the convolutional and single-shot lstm models were relatively close in performance, so to try to clearly differentiate which model is best, we tried evaluating or model by predicting the AAPL stock for the next 2,4,8,16 and 32 days, given the last 30 days. 
+We noticed that when only predicting one day ahead, the convolutional and single-shot lstm models were relatively close in performance, so to try to clearly differentiate which model is best, we tried evaluating or model by predicting the AAPL stock for the next 2,4,8,16 and 32 days, given the last 30 days. 
 
 Finally, we repeated the experiement for stock other than AAPL. This includes MSFT, GOOG, AMZN, META. For each stock, we also repeated the tests for our different label_widths.
 
 ## Results
 
-While we discovered that the convolutional model performed the best on our data, we were initially surprised how badly all of our models seemed to perform in general. Overall, it seems all 3 models just look at the previous trend, and just assumes that the next stock price will follow that same trend. Our autorecurrent model, which we expected would perform the best, consistently predicted way too low prices, and was clearly the worst out of all. We therefore conclude that predicting stock prices based purely on historical data is very hard, if not impossible. A stock price depends on so many more factors than just yesterday's price, so regardless of how deep and complex neural network you train, historical data is just not rich enough.
+While we discovered that the convolutional model performed the best on our data, we were initially surprised how badly all of our models seemed to perform in general. Overall, it seems all 3 models just look at the previous trend, and just assumes that the next stock price will follow that same trend. Our autorecurrent model, which we expected would perform the best, consistently predicted way too low prices, and was clearly the worst out of all. 
 
 Here you can see the entire AAPL stock divided into training, validation and test. Overlayed on the test data are also a couple one day predictions for each of our model.
 
@@ -148,15 +148,15 @@ convolution test MSE: 0.00342
 
 When retraining and testing our models against different stocks, not just AAPL, we found that our convolutional model consistently performed the best, regardless of which stock we used.
 
+From our this, we conclude that predicting stock prices based purely on historical data is very hard, if not impossible. A stock price depends on so many more factors than just yesterday's price, so regardless of how deep and complex neural network you train, historical data is just not rich enough.
+
 ## Problems and Future Work
 
 Yahoo finance is missing data for weekends. This makes our plots look slightly skewed, since samples are grouped into groups of 5. However, we don't think this caused any problems except making our graphs look slightly off.
 
 Because of the limitations of only using historical data, we would like to in the future add more features as inputs, for example headlines from news articles, to see if this would help our models perform better. Sometimes stock prices changes drastically as a reaction to a breaking news article, so building a NLP model to help with stock prediction could potentially help alot.
 
-We then normalize all data using the mean and standard deviation of the training set. In the future, it might be worthwhile to use rolling averages for this normalization process.
-
-Moreover, just looking at our bad predictions, we also suspect that a naive model which just predicts the same stock price as yesterdays value might even beat our neural networks, and this is a theory we would like to test, but didn't have enough time to try.
+Moreover, just looking at our predictions, we would like to compare all our models with a naive naive model which just predicts the same stock price as the input. This would provide a lot of insight, because it's possible the naive model might outright beat our neural networks (at least the autoregressive one). This is a theory we would like to test, but didn't have enough time to try and implement.
 
 ## Video
 
