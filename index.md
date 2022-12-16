@@ -133,7 +133,7 @@ convolution test MSE: 0.00258
 ```
 
 [![big16](big16.png)](big16.png)
-[![zoom16](zoom16.png)](big16.png)
+[![zoom16](zoom16.png)](zoom16.png)
 
 LABEL_WIDTH = 32
 
