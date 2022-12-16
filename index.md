@@ -54,7 +54,7 @@ While we discovered that the convolutional model performed the best on our data,
 
 Here you can see the entire AAPL stock divided into training, validation and test. Overlayed on the test data are also a couple one day predictions for each of our model.
 
-![big1](big1.png)
+[![big1](big1.png)](big1.png)
 
 Zooming in, we can see our predictions don't start until a fair bit into the testing set, which is because we have our input_width set to 30. Each blue, magenta and red dot in the plot is a model predictions using the previous 30 greens dots as input.  
 
@@ -69,7 +69,7 @@ autoregressive test MSE: 0.00095
 convolution test MSE: 0.00089
 ```
 
-![zoom1](zoom1.png)
+[![zoom1](zoom1.png)](zoom1.png)
 
 
 Similarly, we can look at the graph for when LABEL_WIDTH = 2
@@ -83,8 +83,8 @@ autoregressive test MSE: 0.00144
 convolution test MSE: 0.00101
 ```
 
-![big2](big2.png)
-![zoom2](zoom2.png)
+[![big2](big2.png)](big2.png)
+[![zoom2](zoom2.png)](zoom2.png)
 
 LABEL_WIDTH = 4
 
@@ -98,8 +98,8 @@ autoregressive test MSE: 0.00177
 convolution test MSE: 0.00130
 ```
 
-![big4](big4.png)
-![zoom4](zoom4.png)
+[![big4](big4.png)](big4.png)
+[![zoom4](zoom4.png)](zoom4.png)
 
 LABEL_WIDTH = 8
 
@@ -113,8 +113,8 @@ autoregressive test MSE: 0.00317
 convolution test MSE: 0.00220
 ```
 
-![big8](big8.png)
-![zoom8](zoom8.png)
+[![big8](big8.png)](big8.png)
+[![zoom8](zoom8.png)](zoom8.png)
 
 LABEL_WIDTH = 16
 
@@ -128,8 +128,8 @@ autoregressive test MSE: 0.00394
 convolution test MSE: 0.00258
 ```
 
-![big16](big16.png)
-![zoom16](zoom16.png)
+[![big16](big16.png)](big16.png)
+[![zoom16](zoom16.png)](big16.png)
 
 LABEL_WIDTH = 32
 
@@ -143,8 +143,8 @@ autoregressive test MSE: 0.00494
 convolution test MSE: 0.00342
 ```
 
-![big32](big32.png)
-![zoom32](zoom32.png)
+[![big32](big32.png)](big32.png)
+[![zoom32](zoom32.png)](zoom32.png)
 
 When retraining and testing our models against different stocks, not just AAPL, we found that our convolutional model consistently performed the best, regardless of which stock we used.
 
