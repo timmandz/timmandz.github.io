@@ -14,7 +14,9 @@ There's various research out there regarding stock price prediction. One paper t
 
 ## Methodology
 
-We get all of our stock price data using yFinance, which is an open-source Python library that allows easy and free access to stock data from Yahoo Finance. We can request data for any company and any time period. The data includes features such as open price, closing price, the day's high, the day's low, the adjusted close, and volume, for any given date. To simplify, we only keep the "Closing price" (and date). Thus, we want our models to predict the future closing price of a given stock, using only historical closing price as input. In future work, it may be worthwhile to consider other features and their affects on the model's accuracy, although we suspect that they are all highly correlated and that including all the features are probably redundant.
+We get all of our stock price data using yFinance, which is an open-source Python library that allows easy and free access to stock data from Yahoo Finance. We can request data for any company and any time period. The data includes features such as open price, closing price, the day's high, the day's low, the adjusted close, and volume, for any given date. To simplify, we only keep the "Closing price" (and date). Thus, we want our models to predict the future closing price of a given stock, using only historical closing price as input. In future work, it may be worthwhile to consider other features and their affects on the model's accuracy, although we suspect that they are all highly correlated and that including all the features are probably redundant. We have an example of yfinance data for a company here.
+
+![yfinance data example](yfinance_data.png)
 
 First, we pull all closing prices for AAPL (Apple Inc) between X and Y. We split the data into training, validation, and test sets using the ratios (70%, 20%, 10%). (include image here). We do not shuffle the data before splitting to maintain it's orginal order, and to ensure that the validation and testing sets are collected after the training set, which mimics how one would use the model in the real world. 
 
