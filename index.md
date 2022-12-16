@@ -32,7 +32,19 @@ Note that a single pair input-output pair (input_0, labels_0) does not overlap b
 
 The simplest model you can build is one that predicts a stock price a single day in the future. For this we decided to let the model use 30 days as input, and then predict the 31st day. The reason we decided to 30 days is because in reality, you would want as big input as possible to let the model learn as much as possible. However, the more days you use, the smaller your data sets become, and we found 30 to be a good middle ground.
 
-We attempted to predict stock prices using 3 different models. Two were single-shot models, one a convultional neural network and the other an LSTM model. The third model was an autoregrissviev LSTM model. For the single-shot convultional neural network, we
+We attempted to predict stock prices using 3 different models. Two were single-shot models, one a convultional neural network and the other an LSTM model. The third model was an autoregrissviev LSTM model. 
+
+For the single-shot convoltional neural network, we used a model with a 1d convolutional layer with 256 filters and a kernel size of 3, and then a linear layer mapping to our output (label_width). The activation function we used was relu.
+
+For our single-shot lstm network, we vertically stacked 3 LSTMs of 32 units each, and then mapped it to our label_width using 1 linear layer.
+
+For our autoregressive lstm model, we use a single lstm layer, whose outputs get fed back into the model again, repeated label_width number of times.
+
+For each model, we trained and evaluted only on a single stock at a time. For most parts, we used AAPL, but we also later retrained our models on other stock to confirm our results.
+
+When only predicting one day ahead, the convolutional and single-shot lstm models were relatively close in performance, so to try to clearly differentiate which model is best, we tried evaluating or model by predicting the AAPL stock for the next 2,4,8,16 and 32 days, given the last 30 days. 
+
+Finally, we repeated the experiement for stock other than AAPL. This includes MSFT, GOOG, AMZN, META. For each stock, we also repeated the tests for our different label_widths.
 
 ## Results
 
@@ -57,7 +69,8 @@ convolution test MSE: 0.00089
 
 ![zoom1](zoom1.png)
 
-Next, we tried predicting the AAPL stock for the next 2 days, given the last 30 days. On the following figures we have plotted a some 2-day predictions, which are all predicted on the previous 30 days.
+
+Similarly, we can look at the graph for when LABEL_WIDTH = 2
 
 ```txt
 lstm validation MSE: 0.00679
@@ -71,7 +84,8 @@ convolution test MSE: 0.00101
 ![big2](big2.png)
 ![zoom2](zoom2.png)
 
-4 etc etc..?
+LABEL_WIDTH = 4
+
 
 ```txt
 lstm validation MSE: 0.01110
@@ -85,7 +99,8 @@ convolution test MSE: 0.00130
 ![big4](big4.png)
 ![zoom4](zoom4.png)
 
-8 etc etc..?
+LABEL_WIDTH = 8
+
 
 ```txt
 lstm validation MSE: 0.01037
@@ -99,7 +114,8 @@ convolution test MSE: 0.00220
 ![big8](big8.png)
 ![zoom8](zoom8.png)
 
-16 etc etc..?
+LABEL_WIDTH = 16
+
 
 ```txt
 lstm validation MSE: 0.01502
@@ -113,7 +129,8 @@ convolution test MSE: 0.00258
 ![big16](big16.png)
 ![zoom16](zoom16.png)
 
-32 etc etc..?
+LABEL_WIDTH = 32
+
 
 ```txt
 lstm validation MSE: 0.04082
@@ -127,7 +144,7 @@ convolution test MSE: 0.00342
 ![big32](big32.png)
 ![zoom32](zoom32.png)
 
-We should be noted that we tested our models against many different stocks, not just AAPL. This includes MSFT, GOOG, AMZN, META. For each stock, we retrained our model on data from only that particular stock. For all stocks, the convolutional network consistently performed the best (as finally evaluated on the test set).
+When retraining and testing our models against different stocks, not just AAPL, we found that our convolutional model consistently performed the best, regardless of which stock we used.
 
 ## Problems and Future Work
 
