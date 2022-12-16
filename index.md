@@ -26,6 +26,8 @@ To manage a window, we create a class called WindowGenerator that can handle the
 
 ## Experiments/evaluation
 
+The simplest model you can build on this data is one that predicts a single feature's value one time step into the the future based on current conditions. So we start with building a model to predict the stock price just one day in advance.
+
 ## Results
 
 ## Examples
@@ -34,6 +36,6 @@ To manage a window, we create a class called WindowGenerator that can handle the
 
 ## Video
 
-## Team
+## Team Members
 
 Tim Mandzyuk, Ludvig Liljenberg
