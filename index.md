@@ -152,7 +152,7 @@ convolution test MSE: 0.00342
 
 When retraining and testing our models against different stocks, not just AAPL, we found that our convolutional model consistently performed the best, regardless of which stock we used. 
 
-From our this, we conclude that predicting stock prices based purely on historical data is very hard, if not impossible. A stock price depends on so many more factors than just yesterday's price, so regardless of how deep and complex neural network you train, historical data is just not rich enough.
+However, despite the convolutional model performing the best, the model is simply not good, and the error is still very high. From our experiments, we conclude that predicting stock prices based purely on historical data is very hard, if not impossible. A stock price depends on so many more factors than just yesterday's price, so regardless of how deep and complex neural network you train, historical data is just not rich enough.
 
 ## Problems and Future Work
 
