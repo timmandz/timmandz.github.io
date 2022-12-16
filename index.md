@@ -28,14 +28,41 @@ Note that a single pair (input_0, labels_0) overlaps.
 
 ## Experiments/evaluation
 
-The simplest model you can build on this data is one that predicts a single feature's value one time step into the the future based on current conditions. So we start with building a model to predict the stock price just one day in advance.
+The simplest model you can build is one that predicts a stock price a single day in the future. For this we decided to let the model use 30 days as input, and then predict the 31st day. The reason we decided to 30 days is because in reality, you would want as big input as possible to let the model learn as much as possible. However, the more days you use, the smaller your data sets become, and we found 30 to be a good middle ground.
+
+Here you can see the entire MSFT stock divided into training, validation and test. Overlayed on the test data are also a couple one day predictions for each of our model.
+
+![big1](big1.png)
+
+Zooming in, we can see our predictions don't start until a fair bit into the testing set, which is because we have our input_width set to 30. Each blue, magenta and red dot in the plot is a model predictions using the previous 30 greens dots as input. The reason the dots are grouped into chunks are 5 instead of being evenly space dout is because Yahoo Finance does not have stock prices for weekends.  
+
+To evaluate the models, we can look at the plots, as well as evaluate the mean squared error on the validation and test sets, which tells us that our convolutional model performed the best. 
+![zoom1](zoom1.png)
+
+Next, we tried predicting the AAPL stock for the next 2 days, given the last 30 days. On the following figures we have plotted a some 2-day predictions, which are all predicted on the previous 30 days.
+![big2](big2.png)
+![zoom2](zoom2.png)
+4 etc etc..?
+![big4](big4.png)
+![zoom4](zoom4.png)
+8 etc etc..?
+![big8](big8.png)
+![zoom8](zoom8.png)
+16 etc etc..?
+![big16](big16.png)
+![zoom16](zoom16.png)
+32 etc etc..?
+![big32](big32.png)
+![zoom32](zoom32.png)
 
 ## Results
+While we discovered that model X performed the best on our data, we were initially surprised how badly all of our models seemed to perform in general. Overall, it seems all 3 models just look at the previous trend, and just assumes that the next stock price will follow that same trend. We therefore conclude that predicting stock prices based purely on historical data is very hard, if not impossible. A stock price depends on so many more factors than just yesterday's price, so regardless of how deep and complex neural network you train, historical data is just not rich enough.
+
 
 ## Examples
 
 ## Problems and Future Work
-
+Because of the limitations of only using historical data, we would like to in the future add more features as inputs, for example headlines from news articles, to see if this would help our models perform better. 
 ## Video
 
 ## Team Members
