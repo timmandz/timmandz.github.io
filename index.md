@@ -1,10 +1,10 @@
 ## Abstract
 
-The stock market acts as an area with lots of potential for experimenting with deep learning to predict future stock prices. For our final project, we analyze various model architectures as well as experiment in many ways to see how we can make the best stock predicitor. The main goal of our final project was to properly do time series forecasting using a Recurrent Neural Network (RNN). There are two main parts we focus on. Firstly we  look at single time step forecast and then a more broad forecast, looking at multiple steps. 
+The stock market has huge potential for experimenting with deep learning. If one is able to accurately predict future stock prices, money would no longer be an issue. In this project we use compare different model architectures ability to forecast the stock market in the hopes of finding out which model architectures have potential, and which model architecture should best be avoided. 
 
 ## Problem Statement
 
-Our project does not solve a problem, however it acts as an aid to those who would like to make good predictions for the stock market. We hypothesize that despite many claims against being able to make accurate stock price predictions, we would be able to come up with a model that might give some direction into the trend of a stock price for the coming days. We would like to focus on using a RNN-based deep learning model and building long and short-term memory (LSTM).
+For our final project, we analyze 2 single-shot prediction models: an LSTM model, and a convolutional mode, as well as an autogregressive LSTM model, to see which model, given only historical data of a particular stock, performs the best in predicting future stock prices. We hypothesize that despite many claims against being able to make accurate stock price predictions, we will be able to come up with a (relatively) simple model that might give some direction into the trend of a stock price for the coming days. 
 
 ## Related Work
 
@@ -12,13 +12,15 @@ There's various research out there regarding stock price prediction. One paper t
 
 ## Methodology
 
-We get all of our data yFinance, which is an open-source Python library that allows easy and free access to stock data from Yahoo Finance. We can request data for any company and any time period. The data includes columns such as the date, open cost, closing cost, the day's high, the day's low, the adjusted close, and volume. As we are looking to predict the price of stocks, we filter out our data to contain only the date and close cost. This helps simplify our model. In future work, it may be worthwhile to consider other columns and their affects on the model's accuracy.
+We get all of our stock price data using yFinance, which is an open-source Python library that allows easy and free access to stock data from Yahoo Finance. We can request data for any company and any time period. The data includes features such as open price, closing price, the day's high, the day's low, the adjusted close, and volume, at any given date. To simplify, we only keep the "Closing price" (and date). Thus, we want our models to predict the future closing price of a given stock, using only historical closing price as input. In future work, it may be worthwhile to consider other features and their affects on the model's accuracy, although we suspect that they are all highly correlated and that including all features are probably redundant.
 
-We split (70%, 20%, 10%) the data into training, validation, and test sets. We do not shuffle the data before splitting to maintain it's orgininal order. Once the data is split and filtered, we also scale it by normalizing the data. The way we normalize is by subtracting the mean and dividing by the standard deviation of each feature. We calculate the mean and standard deviation using only the training data so that the models have no access to the values in the validation and test sets. In the future, it might be worthwhile to use rolling averages for this normalization process; however, in the interest of simplicity we use a simple average.
+First, will pull all closing prices for AAPL (Apple Inc) between X and Y. We split the data into training, validation, and test sets using the ratios (70%, 20%, 10%). (include image here). We do not shuffle the data before splitting to maintain it's orginal order, and to ensure that the validation and testing sets are collected after the training set, which mimics how one would use the model in the real world. 
 
-The way we structure our models is by making a set of predictions based on a window of consecutive samples from the data. The important features related to a window include the width fo the input and labels, the time offset between them, and which features are used as inputs, labels, or both.
+We then normalize all data using the mean and standard deviation of the training set. In the future, it might be worthwhile to use rolling averages for this normalization process; however, in the interest of simplicity we use a simple average.
 
-For example, to make a single predicition one day into the future, given six days of history, we would need a window like this:
+We then preprocess our training set into a format suitable for training by splitting it into windows of consecutive samples from the data. We have two tunable parameters: LOOK_BACK, which is the size of the window used for creating the training_set, and the LOOK_FORWARD, which is the size of the window for the labels. 
+
+For example, to make a single predicition one day into the future (LOOK_FORWARD=1), given six days of history (LOOK_BACKWARD=6), we would need a window like this:
 
 ![window example explanation](raw_window_1d.png)
 
