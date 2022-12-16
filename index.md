@@ -18,7 +18,7 @@ We get all of our stock price data using yFinance, which is an open-source Pytho
 
 ![yfinance data example](yfinance_data.png)
 
-First, we pull all closing prices for AAPL (Apple Inc) between 2018-01-01 and 2022-12-15. We split the data into training, validation, and test sets using the ratios (70%, 20%, 10%). (include image here). We do not shuffle the data before splitting to maintain it's orginal order, and to ensure that the validation and testing sets are collected after the training set, which mimics how one would use stock prediction models in the real world. 
+First, we pull all closing prices for AAPL (Apple Inc) between 2018-01-01 and 2022-12-15. We split the data into training, validation, and test sets using the ratios (70%, 20%, 10%). ![split](split.png). We do not shuffle the data before splitting to maintain it's orginal order, and to ensure that the validation and testing sets are collected after the training set, which mimics how one would use stock prediction models in the real world. 
 
 We then normalize all data using the mean and standard deviation of the training set. In the future, it might be worthwhile to use rolling averages for this normalization process; however, in the interest of simplicity we use a simple average.
 
