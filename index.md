@@ -20,11 +20,14 @@ We then normalize all data using the mean and standard deviation of the training
 
 We then preprocess our training set into a format suitable for training. Since we want our models to take historical stock prices as input, and predict future stock prices as output, we have to use the same format during training: From our training set we create two sets, inputs (x) and labels (y). Each sample in our inputs consists of a window of consecutive samples from the data. The size of the window is a tunable parameter (INPUT_WIDTH), and defines how many consecutive days our models will use to make each prediction. Each sample in our labels set is also a window of consecutive sample from the data, where the window is of size LABEL_WIDTH, which defines how many days the model will predict for each prediction. Finally we also have parameter OFFSET which defines how many days into the future the predictions should be from the input. For simplicity we always used OFFSET=1.
 
-For example, to make a single predicition (LABEL_WIDTH=1) one day (OFFSET=1) into the future, given six days of history (INPUT_WIDTH=6), we would need a window like this:
+Example 1: To make a single predicition (LABEL_WIDTH=1) one day (OFFSET=1) into the future, given six days of history (INPUT_WIDTH=6), we would need a window like this:
 
 ![window example explanation](raw_window_1d.png)
 
-Note also that a single pair (input_0, labels_0) overlaps
+
+Example 2: To make predictions for the next 7 days, given the last 30 days, the parameters would be LABEL_WIDTH=7, INPUT_WIDTH=30. (Since we always want to start predictions starting on the day after our inputs, we always set OFFSET=1).
+
+
 
 ## Experiments/evaluation
 
