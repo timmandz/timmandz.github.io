@@ -20,7 +20,7 @@ We get all of our stock price data using yFinance, which is an open-source Pytho
 
 First, we pull all closing prices for AAPL (Apple Inc) between 2018-01-01 and 2022-12-15. We split the data into training, validation, and test sets using the ratios (70%, 20%, 10%). 
 
-![split](split.png)
+[![split](split.png)](split.png)
 
 We do not shuffle the data before splitting to maintain it's orginal order, and to ensure that the validation and testing sets are collected after the training set, which mimics how one would use stock prediction models in the real world. 
 
