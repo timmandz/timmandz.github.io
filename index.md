@@ -74,6 +74,8 @@ Next, we tried predicting the AAPL stock for the next 2 days, given the last 30 
 ![big32](big32.png)
 ![zoom32](zoom32.png)
 
+We should be noted that we tested our models against many different stocks, not just AAPL. This includes MSFT, GOOG, AMZN, META. For each stock, we retrained our model on data from only that particular stock. For all stocks, the convolutional network consistently performed the best (as finally evaluated on the test set).
+
 ## Results
 While we discovered that the convolutional model performed the best on our data, we were initially surprised how badly all of our models seemed to perform in general. Overall, it seems all 3 models just look at the previous trend, and just assumes that the next stock price will follow that same trend. Our autorecurrent model, which we expected would perform the best, consistently predicted way too low prices, and was clearly the worst out of all. We therefore conclude that predicting stock prices based purely on historical data is very hard, if not impossible. A stock price depends on so many more factors than just yesterday's price, so regardless of how deep and complex neural network you train, historical data is just not rich enough.
 
