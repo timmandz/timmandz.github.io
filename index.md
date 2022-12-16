@@ -164,6 +164,8 @@ Moreover, just looking at our predictions, we would like to compare all our mode
 
 ## Video
 
+Our video can be found [here](https://youtu.be/2ClgioSGxUs).
+
 ## Team Members
 
 Tim Mandzyuk, Ludvig Liljenberg
