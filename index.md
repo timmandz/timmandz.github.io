@@ -4,7 +4,7 @@ The stock market has huge potential for experimenting with deep learning. If one
 
 ## Problem Statement
 
-For our final project, we analyze 2 single-shot prediction models: an LSTM model, and a convolutional mode, as well as an autogregressive LSTM model, to see which model, given only historical data of a particular stock, performs the best in predicting future stock prices. We hypothesize that despite many claims against being able to make accurate stock price predictions, we will be able to come up with a (relatively) simple model that might give some direction into the trend of a stock price for the coming days. 
+For our final project, we analyze 2 single-shot prediction models: an LSTM model, and a convolutional model, as well as an autogregressive LSTM model, to see which model, given only historical data of a particular stock, performs the best in predicting future stock prices. We hypothesize that despite many claims against being able to make accurate stock price predictions, we will be able to come up with a (relatively) simple model that might give some direction into the trend of a stock price for the coming days. 
 
 ## Related Work
 
@@ -24,19 +24,19 @@ For example, to make a single predicition (LABEL_WIDTH=1) one day (OFFSET=1) int
 
 ![window example explanation](raw_window_1d.png)
 
-Note that a single pair (input_0, labels_0) overlaps.
+Note that a single pair input-output pair (input_0, labels_0) does not overlap between input and label, but subsequent training pairs overlap a lot, for example in addition to the training pair showed above, the next training pair would be ([1,2,3,4,5,6], [7]).
 
 ## Experiments/evaluation
 
 The simplest model you can build is one that predicts a stock price a single day in the future. For this we decided to let the model use 30 days as input, and then predict the 31st day. The reason we decided to 30 days is because in reality, you would want as big input as possible to let the model learn as much as possible. However, the more days you use, the smaller your data sets become, and we found 30 to be a good middle ground.
 
-Here you can see the entire MSFT stock divided into training, validation and test. Overlayed on the test data are also a couple one day predictions for each of our model.
+Here you can see the entire AAPL stock divided into training, validation and test. Overlayed on the test data are also a couple one day predictions for each of our model.
 
 ![big1](big1.png)
 
-Zooming in, we can see our predictions don't start until a fair bit into the testing set, which is because we have our input_width set to 30. Each blue, magenta and red dot in the plot is a model predictions using the previous 30 greens dots as input. The reason the dots are grouped into chunks are 5 instead of being evenly space dout is because Yahoo Finance does not have stock prices for weekends.  
+Zooming in, we can see our predictions don't start until a fair bit into the testing set, which is because we have our input_width set to 30. Each blue, magenta and red dot in the plot is a model predictions using the previous 30 greens dots as input.  
 
-To evaluate the models, we can look at the plots, as well as evaluate the mean squared error on the validation and test sets, which tells us that our convolutional model performed the best.
+To evaluate the models, we can look at the plots, as well as evaluate the mean squared error on the validation and specificallly the test set. This tells us that our convolutional model performed the best.
 
 ```txt
 __One day prediction (label width is 1)__
@@ -75,10 +75,8 @@ Next, we tried predicting the AAPL stock for the next 2 days, given the last 30 
 ![zoom32](zoom32.png)
 
 ## Results
+While we discovered that the convolutional model performed the best on our data, we were initially surprised how badly all of our models seemed to perform in general. Overall, it seems all 3 models just look at the previous trend, and just assumes that the next stock price will follow that same trend. Our autorecurrent model, which we expected would perform the best, consistently predicted way too low prices, and was clearly the worst out of all. We therefore conclude that predicting stock prices based purely on historical data is very hard, if not impossible. A stock price depends on so many more factors than just yesterday's price, so regardless of how deep and complex neural network you train, historical data is just not rich enough.
 
-While we discovered that model X performed the best on our data, we were initially surprised how badly all of our models seemed to perform in general. Overall, it seems all 3 models just look at the previous trend, and just assumes that the next stock price will follow that same trend. We therefore conclude that predicting stock prices based purely on historical data is very hard, if not impossible. A stock price depends on so many more factors than just yesterday's price, so regardless of how deep and complex neural network you train, historical data is just not rich enough.
-
-## Examples
 
 ## Problems and Future Work
 
